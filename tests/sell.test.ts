@@ -3,7 +3,7 @@ import * as anchor from "@project-serum/anchor";
 import {
     createKeypairFromFile,
 } from './util';
-import { MintNft } from "../target/types/mint_nft";
+import { SolanaNft } from "../target/types/solana_nft";
 
 
 describe("sell-nft", async () => {
@@ -19,7 +19,7 @@ describe("sell-nft", async () => {
     //   new anchor.web3.PublicKey("H2UJjAQTuVJYhaBhh6GD2KaprLBTp1vhP2aaHioya5NM"),
     // );
     // ** Comment this to use solpg imported IDL **
-    const program = anchor.workspace.MintNft as anchor.Program<MintNft>;
+    const program = anchor.workspace.SolanaNft as anchor.Program<SolanaNft>;
 
 
     it("Sell!", async () => {
