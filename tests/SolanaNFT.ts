@@ -4,9 +4,9 @@ import { SolanaNft } from "../target/types/solana_nft";
 
 describe("SolanaNFT", () => {
 
-  const testNFTTitle = "Dinamo NFT!";
-  const testNFTSymbol = "DZG";
-  const testNFTUri = "https://raw.githubusercontent.com/Coding-and-Crypto/Rust-Solana-Tutorial/master/nfts/mint-nft/assets/example.json";
+  const testNFTTitle = "Dinamo Zagreb NFT!";
+  const testNFTSymbol = "Dinamo";
+  const testNFTUri = "https://raw.githubusercontent.com/ICavlek/SolanaNFT/main/assets/examples.json";
 
   const provider = anchor.AnchorProvider.env();
   const wallet = provider.wallet as anchor.Wallet;
