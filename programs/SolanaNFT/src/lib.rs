@@ -6,7 +6,7 @@ use {
     mpl_token_metadata::{instruction as token_instruction, ID as TOKEN_METADATA_ID},
 };
 
-declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+declare_id!("FRp18Tu2U545ztPWqma7uHudGW1eiSLnBdpG2SJjgybR");
 
 #[program]
 pub mod solana_nft {
