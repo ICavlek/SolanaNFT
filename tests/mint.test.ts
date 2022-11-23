@@ -6,7 +6,7 @@ describe("SolanaNFT", () => {
 
   const testNFTTitle = "Dinamo Zagreb NFT!";
   const testNFTSymbol = "Dinamo";
-  const testNFTUri = "https://raw.githubusercontent.com/ICavlek/SolanaNFT/main/assets/examples.json";
+  const testNFTUri = "https://raw.githubusercontent.com/ICavlek/SolanaNFT/main/assets/dinamo.json";
 
   const provider = anchor.AnchorProvider.env();
   const wallet = provider.wallet as anchor.Wallet;
