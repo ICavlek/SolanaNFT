@@ -1,5 +1,6 @@
 import * as anchor from "@project-serum/anchor";
 import { SolanaNft } from "../target/types/solana_nft";
+import { NFTOwner } from "./NFTOwner/NFTOwner";
 
 async function mint(wallet: anchor.Wallet, TOKEN_METADATA_PROGRAM_ID: anchor.web3.PublicKey, program: anchor.Program<SolanaNft>, testNFTTitle, testNFTSymbol, testNFTUri) {
     // Derive the mint address and the associated token account address
@@ -51,9 +52,9 @@ async function mint(wallet: anchor.Wallet, TOKEN_METADATA_PROGRAM_ID: anchor.web
 }
 
 async function main() {
-    const testNFTTitle = "NFT Dinamo";
-    const testNFTSymbol = "Dinamo";
-    const testNFTUri = "https://raw.githubusercontent.com/ICavlek/SolanaNFT/main/assets/dinamo.json";
+    const testNFTTitle = "NFT Hajduk";
+    const testNFTSymbol = "Hajduk";
+    const testNFTUri = "https://raw.githubusercontent.com/ICavlek/SolanaNFT/main/assets/hajduk.json";
 
     const provider = anchor.AnchorProvider.env();
     const wallet = provider.wallet as anchor.Wallet;
@@ -65,7 +66,9 @@ async function main() {
         "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
     ); // Don't know what that is, googled and extracted from metaplex
 
-    await mint(wallet, TOKEN_METADATA_PROGRAM_ID, program, testNFTTitle, testNFTSymbol, testNFTUri);
+    const nftOwner: NFTOwner = new NFTOwner();
+
+    await mint(nftOwner.wallet, nftOwner.tokenMetaDataProgramID, nftOwner.program, testNFTTitle, testNFTSymbol, testNFTUri);
 }
 
 main().then(
