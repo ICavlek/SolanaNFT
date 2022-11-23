@@ -1,0 +1,10 @@
+{
+    "name": "Osijek NFT",
+    "symbol": "Osijek",
+    "description": "NFT For Osijek",
+    "seller_fee_basis_points": 5,
+    "external_url": "",
+    "edition": "",
+    "background_color": "000000",
+    "image": "https://upload.wikimedia.org/wikipedia/hr/thumb/4/4c/NK_Osijek.svg/1200px-NK_Osijek.svg.png"
+}
