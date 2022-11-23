@@ -30,7 +30,7 @@ describe("sell-nft", async () => {
         const mint: anchor.web3.PublicKey = new anchor.web3.PublicKey(
             "AHMFnPmCi1kxifbVibqaDeHRGDV3eyw7a8XNC9WUGz2D"
         );
-        const buyer: anchor.web3.Keypair = await createKeypairFromFile(__dirname + "../accounts/buyer1.json");
+        const buyer: anchor.web3.Keypair = await createKeypairFromFile(__dirname + "/../accounts/john.json");
         console.log(`Buyer public key: ${buyer.publicKey}`);
 
         // Derive the associated token account address for owner & buyer

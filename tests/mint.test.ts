@@ -1,5 +1,4 @@
 import * as anchor from "@project-serum/anchor";
-import { Program } from "@project-serum/anchor";
 import { SolanaNft } from "../target/types/solana_nft";
 
 describe("SolanaNFT", () => {
