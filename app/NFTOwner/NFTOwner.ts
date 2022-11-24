@@ -15,30 +15,19 @@ export class NFTOwner {
 
     async mint(nftData: NFTData) {
         const mintKeypair: anchor.web3.Keypair = this.createMintKeypair();
-        const tokenAddress: anchor.web3.PublicKey = await this.createTokenAddress(mintKeypair);
+        const tokenAddress: anchor.web3.PublicKey = await this.createTokenAddress(mintKeypair.publicKey, this.wallet.publicKey);
         const metadataAddress: anchor.web3.PublicKey = await this.createMetadataAddress(mintKeypair);
         const masterEditionAddress: anchor.web3.PublicKey = await this.createMasterEditionAddress(mintKeypair);
         await this.callMint(masterEditionAddress, metadataAddress, mintKeypair, tokenAddress, nftData);
     }
 
     async sell(nftPublicKey: anchor.web3.PublicKey, keypairJohn: anchor.web3.Keypair) {
-        const mint: anchor.web3.PublicKey = nftPublicKey;
-        const buyer: anchor.web3.Keypair = keypairJohn;
         const saleAmount = 0.0005 * anchor.web3.LAMPORTS_PER_SOL;
-        console.log(`Buyer public key: ${buyer.publicKey}`);
-
-        // Derive the associated token account address for owner & buyer
-
-        const ownerTokenAddress = await anchor.utils.token.associatedAddress({
-            mint: mint,
-            owner: this.wallet.publicKey
-        });
-        const buyerTokenAddress = await anchor.utils.token.associatedAddress({
-            mint: mint,
-            owner: buyer.publicKey,
-        });
-        console.log(`Request to sell NFT: ${mint} for ${saleAmount} lamports.`);
+        console.log(`Buyer public key: ${keypairJohn.publicKey}`);
+        console.log(`Request to sell NFT: ${nftPublicKey} for ${saleAmount} lamports.`);
+        const ownerTokenAddress = await this.createTokenAddress(nftPublicKey, this.wallet.publicKey);
         console.log(`Owner's Token Address: ${ownerTokenAddress}`);
+        const buyerTokenAddress = await this.createTokenAddress(nftPublicKey, keypairJohn.publicKey);
         console.log(`Buyer's Token Address: ${buyerTokenAddress}`);
 
         // Transact with the "sell" function in our on-chain program
@@ -47,13 +36,13 @@ export class NFTOwner {
             new anchor.BN(saleAmount)
         )
             .accounts({
-                mint: mint,
+                mint: nftPublicKey,
                 ownerTokenAccount: ownerTokenAddress,
                 ownerAuthority: this.wallet.publicKey,
                 buyerTokenAccount: buyerTokenAddress,
-                buyerAuthority: buyer.publicKey,
+                buyerAuthority: keypairJohn.publicKey,
             })
-            .signers([buyer])
+            .signers([keypairJohn])
             .rpc();
     }
 
@@ -81,11 +70,11 @@ export class NFTOwner {
         return mintKeypair;
     }
 
-    private async createTokenAddress(mintKeypair: anchor.web3.Keypair): Promise<anchor.web3.PublicKey> {
+    private async createTokenAddress(mintKeypairPublicKey: anchor.web3.PublicKey, ownerPublicKey: anchor.web3.PublicKey): Promise<anchor.web3.PublicKey> {
         console.log("Creating token address...");
         return await anchor.utils.token.associatedAddress({
-            mint: mintKeypair.publicKey,
-            owner: this.wallet.publicKey
+            mint: mintKeypairPublicKey,
+            owner: ownerPublicKey
         });
     }
 
