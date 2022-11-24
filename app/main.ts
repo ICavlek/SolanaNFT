@@ -4,13 +4,23 @@ import { NFTData } from "./NFTData/NFTData";
 import { createKeypairFromFile, getNFTPublicKey } from "./utils/utils";
 
 async function main() {
-    const nftOwner: NFTOwner = new NFTOwner();
-    const nftData: NFTData = new NFTData("Osijek");
-    // await nftOwner.mint(nftData);
+    const mintNFT: boolean = false;
+    const newNFTName: string = "Osijek";
+    const sellNFT: boolean = false;
+    const whichNFTToSell: string = "Dinamo Zagreb NFT!";
+    const toWhichAccount: string = "john";
 
-    const nftPublicKey: anchor.web3.PublicKey = getNFTPublicKey("Dinamo Zagreb NFT!");
-    const keypairJohn: anchor.web3.Keypair = await createKeypairFromFile("john");
-    nftOwner.sell(nftPublicKey, keypairJohn);
+    const nftOwner: NFTOwner = new NFTOwner();
+    if (mintNFT) {
+        const nftData: NFTData = new NFTData(newNFTName);
+        await nftOwner.mint(nftData);
+    }
+
+    if (sellNFT) {
+        const nftPublicKey: anchor.web3.PublicKey = getNFTPublicKey(whichNFTToSell);
+        const keypairJohn: anchor.web3.Keypair = await createKeypairFromFile(toWhichAccount);
+        await nftOwner.sell(nftPublicKey, keypairJohn);
+    }
 }
 
 main().then(

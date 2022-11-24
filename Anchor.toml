@@ -12,6 +12,6 @@ cluster = "devnet"
 wallet = "/home/ic1993/.config/solana/id.json"
 
 [scripts]
-mint = "yarn run ts-node ./app/main.ts"
+MintSellNFT = "yarn run ts-node ./app/main.ts"
 test_mint = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/mint.test.ts"
 test_sell = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/sell.test.ts"
