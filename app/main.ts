@@ -5,9 +5,9 @@ import { createKeypairFromFile, getNFTPublicKey } from "./utils/utils";
 
 async function main() {
     const mintNFT: boolean = false;
-    const newNFTName: string = "Sibenik";
+    const newNFTName: string = "Rijeka";
     const sellNFT: boolean = false;
-    const whichNFTToSell: string = "Sibenik";
+    const whichNFTToSell: string = "Rijeka";
     const toWhichAccount: string = "john";
 
     const nftOwner: NFTOwner = new NFTOwner();
