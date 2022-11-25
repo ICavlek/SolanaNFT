@@ -1,0 +1,10 @@
+{
+    "name": "Sibenik NFT",
+    "symbol": "Sibenik",
+    "description": "NFT For Sibenik",
+    "seller_fee_basis_points": 5,
+    "external_url": "",
+    "edition": "",
+    "background_color": "000000",
+    "image": "https://upload.wikimedia.org/wikipedia/en/thumb/6/67/HNK_%C5%A0ibenik_logo.svg/1200px-HNK_%C5%A0ibenik_logo.svg.png"
+}
