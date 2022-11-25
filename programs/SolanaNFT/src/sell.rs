@@ -3,8 +3,35 @@ use {
     anchor_spl::{associated_token, token},
 };
 
-pub fn sell(ctx: Context<SellNft>, sale_lamports: u64) -> Result<()> {
-    msg!("Initiating transfer of {} lamports...", sale_lamports);
+pub fn sell(ctx: Context<SellNFT>, sale_lamports: u64) -> Result<()> {
+    transfer_lamports(&ctx, sale_lamports)?;
+    create_buyer_token_account(&ctx)?;
+    transfer_nft(&ctx)?;
+    msg!("NFT transferred successfully.");
+    msg!("Sale completed successfully!");
+    Ok(())
+}
+
+#[derive(Accounts)]
+pub struct SellNFT<'info> {
+    #[account(mut)]
+    pub mint: Account<'info, token::Mint>,
+    #[account(mut)]
+    pub owner_token_account: Account<'info, token::TokenAccount>,
+    #[account(mut)]
+    pub owner_authority: Signer<'info>,
+    /// CHECK: We're about to create this with Anchor
+    #[account(mut)]
+    pub buyer_token_account: UncheckedAccount<'info>,
+    #[account(mut)]
+    pub buyer_authority: Signer<'info>,
+    pub rent: Sysvar<'info, Rent>,
+    pub system_program: Program<'info, System>,
+    pub token_program: Program<'info, token::Token>,
+    pub associated_token_program: Program<'info, associated_token::AssociatedToken>,
+}
+
+fn transfer_lamports(ctx: &Context<SellNFT>, sale_lamports: u64) -> Result<()> {
     msg!(
         "Purchaser (sending lamports): {}",
         &ctx.accounts.buyer_authority.key()
@@ -22,10 +49,10 @@ pub fn sell(ctx: Context<SellNft>, sale_lamports: u64) -> Result<()> {
             },
         ),
         sale_lamports,
-    )?;
+    )
+}
 
-    msg!("Lamports transferred successfully.");
-
+fn create_buyer_token_account(ctx: &Context<SellNFT>) -> Result<()> {
     msg!("Creating buyer token account...");
     msg!(
         "Buyer Token Address: {}",
@@ -42,8 +69,10 @@ pub fn sell(ctx: Context<SellNft>, sale_lamports: u64) -> Result<()> {
             token_program: ctx.accounts.token_program.to_account_info(),
             rent: ctx.accounts.rent.to_account_info(),
         },
-    ))?;
+    ))
+}
 
+fn transfer_nft(ctx: &Context<SellNFT>) -> Result<()> {
     msg!("Transferring NFT...");
     msg!(
         "Owner Token Address: {}",
@@ -63,29 +92,5 @@ pub fn sell(ctx: Context<SellNft>, sale_lamports: u64) -> Result<()> {
             },
         ),
         1,
-    )?;
-    msg!("NFT transferred successfully.");
-
-    msg!("Sale completed successfully!");
-
-    Ok(())
-}
-
-#[derive(Accounts)]
-pub struct SellNft<'info> {
-    #[account(mut)]
-    pub mint: Account<'info, token::Mint>,
-    #[account(mut)]
-    pub owner_token_account: Account<'info, token::TokenAccount>,
-    #[account(mut)]
-    pub owner_authority: Signer<'info>,
-    /// CHECK: We're about to create this with Anchor
-    #[account(mut)]
-    pub buyer_token_account: UncheckedAccount<'info>,
-    #[account(mut)]
-    pub buyer_authority: Signer<'info>,
-    pub rent: Sysvar<'info, Rent>,
-    pub system_program: Program<'info, System>,
-    pub token_program: Program<'info, token::Token>,
-    pub associated_token_program: Program<'info, associated_token::AssociatedToken>,
+    )
 }

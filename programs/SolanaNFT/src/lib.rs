@@ -21,7 +21,7 @@ pub mod solana_nft {
         mint::mint(ctx, metadata_title, metadata_symbol, metadata_uri)
     }
 
-    pub fn sell(ctx: Context<SellNft>, sale_lamports: u64) -> Result<()> {
+    pub fn sell(ctx: Context<SellNFT>, sale_lamports: u64) -> Result<()> {
         sell::sell(ctx, sale_lamports)
     }
 }
