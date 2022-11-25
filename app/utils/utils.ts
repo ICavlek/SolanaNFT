@@ -16,7 +16,8 @@ export function getNFTPublicKey(NFTToken: string): anchor.web3.PublicKey {
         "Dinamo": "C2otQeNVfi2wkaeLPpm8rxSajgbgJSgumDXSC2eVbcaR",
         "Hajduk": "HCvebUTFJbk4qpsj1YN9WkFB3Nx2u3uh96x8dnzDF1XJ",
         "Osijek": "D4AYQKhkstrbK7PoAqpwqs9WCDMU8SG2g1pZG4ppoJoX",
-        "Sibenik": "DoAoiN9NdW8Lv7poUj1cCSGJjboGroabJHKxAfYJfWaP"
+        "Sibenik": "DoAoiN9NdW8Lv7poUj1cCSGJjboGroabJHKxAfYJfWaP",
+        "Rijeka": "2DyaLMvjrVm6pVKQjsz8NH9k69ETP2o3kcSh2TPVmp5n"
     };
     return new anchor.web3.PublicKey(
         dataBase[NFTToken]
