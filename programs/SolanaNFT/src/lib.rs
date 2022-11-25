@@ -6,7 +6,7 @@ pub mod sell;
 use mint::*;
 use sell::*;
 
-declare_id!("FRp18Tu2U545ztPWqma7uHudGW1eiSLnBdpG2SJjgybR");
+declare_id!("8kbjHeUBCB7p7gXa36aZRqqzW9BNMonTJHxp2tvmccm6");
 
 #[program]
 pub mod solana_nft {
