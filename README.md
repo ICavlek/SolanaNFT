@@ -1,5 +1,5 @@
 # SolanaNFT
-Example of minting and selling Solana NFT within anchor framework.
+Example of minting and selling Solana NFT within anchor framework. All credits for idea to https://www.youtube.com/watch?v=c1GJ-13z6pE&list=PLUBKxx7QjtVnU3hkPc8GF1Jh4DE7cf4n1&index=8&ab_channel=Coding%26Crypto.
 
 ### Creating your own solana keypair
 ```shell
